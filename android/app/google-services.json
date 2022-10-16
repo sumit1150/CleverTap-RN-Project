@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "126752353997",
+    "project_id": "ct-oob-demo-app",
+    "storage_bucket": "ct-oob-demo-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126752353997:android:90651fbcadef2eab5fc384",
+        "android_client_info": {
+          "package_name": "com.ct.ctoobdemoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126752353997-ob30tot8gpsfmbqpcd2f618m42fr9nh9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCST8bhGEeZSDOq40H82SeWdficHyR-h2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126752353997-ob30tot8gpsfmbqpcd2f618m42fr9nh9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
