@@ -12,6 +12,9 @@ import {
   View,Button, Image,Linking,
 } from 'react-native';
 
+import {createAppContainer} from 'react-navigation'
+import {createStackNavigator} from 'react-navigation-stack'
+
 //import { NavigationContainer } from "@react-navigation/native";
 //import { createStackNavigator } from "@react-navigation/stack";
 
@@ -19,8 +22,7 @@ import {
 //import Deep from "./Componant/Deep";
 //const Stack = createStackNavigator();
 
-
-/*function MyStack() {
+/*Stack() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Main" component={Main} />
@@ -37,7 +39,9 @@ const CleverTap = require('clevertap-react-native');
   console.log("e value",e);
 });*/
 
-class App extends React.Component{
+class App extends React.Component
+{
+
 render()
 {
 
@@ -50,9 +54,12 @@ render()
 //const Stack = createNativeStackNavigator();
 
 if(CleverTap!=null){
+
+  console.log(CleverTap.profileGetCleverTapID());
  
  //Notification channel
  CleverTap.createNotificationChannel("General", "General", "Channel-General", 5, true);
+ CleverTap.createNotificationChannelWithSound("Sound","Sumit","YourChannelDescription",1, true,"four.mp3");
  // The notification channel importance can have any value from 1 to 5. A higher value means a more interruptive notification.
  //Setting up the clevertap debugging
  CleverTap.setDebugLevel(3);
@@ -95,6 +102,9 @@ CleverTap.getInitialUrl((err, url) => {
     }
 });
 
+
+
+
 //End
 
 }
@@ -111,6 +121,12 @@ else{
       </View>
       <View style={{flex:2.8,backgroundColor:'steelblue', marginTop:10}}>
       <Button  onPress={() => {CleverTap.recordEvent('React_Sumit_Event');}} title="Press to Raise Custom Event"/>
+      <Button  onPress={()=>{
+        CleverTap.onUserLogin({
+        'Name': 'testUserA1', 'Identity': '9855290227',
+        'Email': 'sumit.kumar@clevertap.com', 'custom1': 123,
+        'birthdate': new Date('1992-12-22T06:35:31')
+    })}} title="Login"/>
       </View>
       
     </View>
@@ -118,6 +134,23 @@ else{
 }
 
 }
+
+/*function Profile(props){
+  return(
+    <View style={{flex:1,alignItems:'center', justifyContent:'center'}}>
+      <Text>Profile Screen</Text>
+      </View>
+  )
+}
+
+const appNavigator=createStackNavigator({
+  Home:{
+    screen:App,
+  },
+  MyProfile:{
+    screen:Profile
+  }
+})*/
 
 
 
@@ -210,4 +243,5 @@ function _handleOpenUrl(event, from)
 })*/
 
 export default App;
+//export default createAppContainer(appNavigator);
 //export default createAppContainer(appNavigator);

@@ -1,10 +1,15 @@
 package com.myproject;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.clevertap.android.sdk.pushnotification.CTPushNotificationListener;
 import com.clevertap.react.CleverTapApplication;
@@ -35,7 +40,8 @@ import com.clevertap.android.sdk.CleverTapAPI;
 import org.json.JSONObject;
 
 //CTPushNotificationListener
-public class MainApplication extends CleverTapApplication implements ReactApplication {
+public class MainApplication extends CleverTapApplication implements  ReactApplication {
+  //Application.ActivityLifecycleCallbacks
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
@@ -75,6 +81,7 @@ public class MainApplication extends CleverTapApplication implements ReactApplic
   @Override
   public void onCreate() {
      ActivityLifecycleCallback.register(this);
+      //registerActivityLifecycleCallbacks(this);
      //I already put this channel in React native
       //Objects.requireNonNull(CleverTapAPI.getDefaultInstance(getApplicationContext())).createNotificationChannel(this,"General","General","General Channel",5,true);
       // The notification channel importance can have any value from 1 to 5. A higher value means a more interruptive notification.
@@ -120,126 +127,41 @@ public class MainApplication extends CleverTapApplication implements ReactApplic
       }
     }
   }
-
-    /*@Override
-    public void onNotificationClickedPayloadReceived(HashMap<String, Object> payload) {
-
-      System.out.println("Noti_payload: "+payload.toString());
-
-        Log.e("MainApplication", "onNotificationClickedPayloadReceived called");
-
-        final String CLEVERTAP_PUSH_NOTIFICATION_CLICKED = "CleverTapPushNotificationClicked";
-
-        Handler handler = new Handler(Looper.getMainLooper());
-
-        handler.post(new Runnable() {
-
-            public void run() {
-
-                // Construct and load our normal React JS code bundle
-
-                final ReactInstanceManager mReactInstanceManager =
-
-                        ((ReactApplication) getApplicationContext())
-
-                                .getReactNativeHost().getReactInstanceManager();
-
-                ReactContext context = mReactInstanceManager.getCurrentReactContext();
-
-                // If it’s constructed, send a notification
-
-                if (context != null) {
-
-                    sendEvent(CLEVERTAP_PUSH_NOTIFICATION_CLICKED,getWritableMapFromMap(payload),context);
-
-                } else {
-
-                    // Otherwise wait for construction, then send the notification
-
-                    mReactInstanceManager.addReactInstanceEventListener(
-
-                            new ReactInstanceManager.ReactInstanceEventListener() {
-
-                                public void onReactContextInitialized(ReactContext context) {
-
-                                    sendEvent(CLEVERTAP_PUSH_NOTIFICATION_CLICKED
-
-                                            ,getWritableMapFromMap(payload),context);
-
-                                    mReactInstanceManager.removeReactInstanceEventListener(this);
-
-                                }
-
-                            });
-
-                    if (!mReactInstanceManager.hasStartedCreatingInitialContext()) {
-
-                        // Construct it in the background
-
-                        mReactInstanceManager.createReactContextInBackground();
-
-                    }
-
-                }
-
-            }
-
-        });
-
-    }*/
-
-
-  /*  private void sendEvent(String eventName, Object params,ReactContext context) {
-
-        try {
-
-            context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-
-                    .emit(eventName, params);
-
-        } catch (Throwable t) {
-
-            Log.e("Tag", t.getLocalizedMessage());
-
-        }
+/*
+    @Override
+    public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
 
     }
 
-    private WritableMap getWritableMapFromMap(Map<String, ? extends Object> var1) {
+    @Override
+    public void onActivityStarted(@NonNull Activity activity) {
 
-        JSONObject extras = var1 != null ? new JSONObject(var1) : new JSONObject();
+    }
 
-        WritableMap extrasParams = Arguments.createMap();
+    @Override
+    public void onActivityResumed(@NonNull Activity activity) {
 
-        Iterator extrasKeys = extras.keys();
+    }
 
-        while (extrasKeys.hasNext()) {
+    @Override
+    public void onActivityPaused(@NonNull Activity activity) {
 
-            String key = null;
+    }
 
-            String value = null;
+    @Override
+    public void onActivityStopped(@NonNull Activity activity) {
 
-            try {
+    }
 
-                key = extrasKeys.next().toString();
+    @Override
+    public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle bundle) {
 
-                value = extras.get(key).toString();
+    }
 
-            } catch (Throwable t) {
-
-                Log.e("Tag", t.getLocalizedMessage());
-
-            }
-
-            if (key != null && value != null) {
-
-                extrasParams.putString(key, value);
-
-            }
-
-        }
-
-        return extrasParams;
+    @Override
+    public void onActivityDestroyed(@NonNull Activity activity) {
 
     }*/
+
+
 }
